@@ -1,30 +1,38 @@
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class Advent1 {
-    public static void main(String[] args) throws IOException {
+public class Advent2 {
+    public static void main(String[] args) {
         String line;
-        int numericValue;
+        long numericValue;
         int sum = 0;
-        int spojenBroj = 0;    //don't mix serbian and english -> example: twoDigitNumber
+        int spojenBroj = 0;
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader("AdventOfCode-1.txt"));
             while ((line = reader.readLine()) != null) {
-                //no need for this big (double or triple) line-breaks
+                line=line.replaceAll("(?i)one","1");
+                line=line.replaceAll("(?i)two","2");
+                line=line.replaceAll("(?i)three","3");
+                line=line.replaceAll("(?i)four","4");
+                line=line.replaceAll("(?i)five","5");
+                line=line.replaceAll("(?i)six","6");
+                line=line.replaceAll("(?i)seven","7");
+                line=line.replaceAll("(?i)eight","8");
+                line=line.replaceAll("(?i)nine","9");
 
-                String numericString = line.replaceAll("[^0-9]", "");     //nice 
+                String numericString = line.replaceAll("[^0-9]","");
                 int firstDigit;
                 if (numericString.length() != 1) {
-                    int lastDigit = 0;
-                    numericValue = Integer.parseInt(numericString);
+                    long lastDigit = 0;
+                     numericValue = Long.parseLong(numericString);
                     lastDigit = Math.abs(numericValue % 10);
 
-                    firstDigit = Character.getNumericValue(Integer.toString(numericValue).charAt(0));
-                    spojenBroj = Integer.parseInt(Integer.toString(firstDigit) + Integer.toString(lastDigit));    //why do this for every digit until you get to last one
+                    firstDigit = Character.getNumericValue((String.valueOf(numericValue)).charAt(0));
+                    spojenBroj = Integer.parseInt(Integer.toString(firstDigit) + (lastDigit));
                     sum += spojenBroj;
+
 
                     System.out.println(spojenBroj);
                     //System.out.println(numericValue); DEBUGOVAN USPESNO !
@@ -42,4 +50,4 @@ public class Advent1 {
             e.printStackTrace();
         }
     }
-}
+    }
